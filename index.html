@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wrong Input Keypad 🤪</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-group">
+        <span class="logo-icon">🔀</span>
+        <div>
+          <h1>WRONG INPUT KEYPAD</h1>
+          <p class="subtitle">The keyboard engineered to never type what you want</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button id="soundToggleBtn" class="pill-btn sound-btn" title="Toggle Sound">
+          <span class="sound-icon">🔊</span> <span class="sound-label">Sound ON</span>
+        </button>
+        <button id="resetAppBtn" class="pill-btn reset-btn" title="Reset everything">
+          🔄 Reset
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-layout">
+      <!-- Left Column: Display, Controls & Keyboard -->
+      <section class="keyboard-section">
+        <!-- Display Monitor Screen -->
+        <div class="terminal-screen" id="terminalScreen">
+          <div class="screen-header">
+            <div class="traffic-lights">
+              <span class="light red"></span>
+              <span class="light yellow"></span>
+              <span class="light green"></span>
+            </div>
+            <span class="screen-status" id="screenStatus">STATUS: ACTIVE MISCHIEF</span>
+            <span class="mode-badge" id="currentModeBadge">FAT FINGER</span>
+          </div>
+
+          <!-- Target Challenge Banner (if challenge active) -->
+          <div class="challenge-bar" id="challengeBar">
+            <div class="challenge-info">
+              <span class="challenge-label">MISSION:</span>
+              <span class="challenge-target" id="challengeTarget">1234</span>
+            </div>
+            <div class="challenge-stats">
+              <span id="challengeAttempts">Attempts: 0</span>
+              <button id="newChallengeBtn" class="challenge-btn">New Mission</button>
+            </div>
+          </div>
+
+          <!-- Text Display Area -->
+          <div class="screen-body">
+            <div class="screen-meta">
+              <span class="meta-label">Output Buffer:</span>
+              <span class="char-count" id="charCount">0 chars</span>
+            </div>
+            <div class="display-input-wrap">
+              <div class="display-input" id="displayOutput">
+                <span class="placeholder-text">Press keys below to experience pure frustration...</span>
+              </div>
+              <span class="blinking-cursor">|</span>
+            </div>
+            <div class="screen-footer">
+              <span class="last-key-info" id="lastKeyInfo">Pressed: <strong id="pressedKey">-</strong> &rarr; Produced: <strong id="producedKey">-</strong></span>
+              <div class="screen-quick-actions">
+                <button id="copyBtn" class="screen-action-btn" title="Copy to clipboard">📋 Copy</button>
+                <button id="clearBtn" class="screen-action-btn" title="Clear buffer">🗑️ Clear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Keypad Layout Tabs -->
+        <div class="layout-selector">
+          <button class="tab-btn active" data-layout="pin">
+            <span class="tab-icon">🔢</span> PIN Keypad
+          </button>
+          <button class="tab-btn" data-layout="qwerty">
+            <span class="tab-icon">⌨️</span> Full Keyboard
+          </button>
+          <button class="tab-btn" data-layout="calculator">
+            <span class="tab-icon">🧮</span> Troll Calculator
+          </button>
+        </div>
+
+        <!-- Keypad Surface Area -->
+        <div class="keypad-frame" id="keypadFrame">
+          <!-- PIN KEYPAD LAYOUT -->
+          <div class="keypad-layout active" id="pinLayout">
+            <div class="pin-grid">
+              <button class="key-btn" data-key="1">1</button>
+              <button class="key-btn" data-key="2">2</button>
+              <button class="key-btn" data-key="3">3</button>
+              <button class="key-btn" data-key="4">4</button>
+              <button class="key-btn" data-key="5">5</button>
+              <button class="key-btn" data-key="6">6</button>
+              <button class="key-btn" data-key="7">7</button>
+              <button class="key-btn" data-key="8">8</button>
+              <button class="key-btn" data-key="9">9</button>
+              <button class="key-btn action-key clear-key" data-key="CLEAR">CLR</button>
+              <button class="key-btn" data-key="0">0</button>
+              <button class="key-btn action-key backspace-key" data-key="BACKSPACE">&larr;</button>
+            </div>
+            <div class="pin-actions">
+              <button class="key-btn action-key enter-key" data-key="ENTER">
+                <span>SUBMIT PIN</span>
+                <span class="btn-subtext">(Good luck)</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- QWERTY KEYBOARD LAYOUT -->
+          <div class="keypad-layout" id="qwertyLayout">
+            <!-- Row 1: Numbers -->
+            <div class="keyboard-row">
+              <button class="key-btn small" data-key="`">`</button>
+              <button class="key-btn small" data-key="1">1</button>
+              <button class="key-btn small" data-key="2">2</button>
+              <button class="key-btn small" data-key="3">3</button>
+              <button class="key-btn small" data-key="4">4</button>
+              <button class="key-btn small" data-key="5">5</button>
+              <button class="key-btn small" data-key="6">6</button>
+              <button class="key-btn small" data-key="7">7</button>
+              <button class="key-btn small" data-key="8">8</button>
+              <button class="key-btn small" data-key="9">9</button>
+              <button class="key-btn small" data-key="0">0</button>
+              <button class="key-btn small" data-key="-">-</button>
+              <button class="key-btn small" data-key="=">=</button>
+              <button class="key-btn special-key backspace-key" data-key="BACKSPACE">Del</button>
+            </div>
+
+            <!-- Row 2 -->
+            <div class="keyboard-row">
+              <button class="key-btn special-key tab-key" data-key="TAB">Tab</button>
+              <button class="key-btn" data-key="q">Q</button>
+              <button class="key-btn" data-key="w">W</button>
+              <button class="key-btn" data-key="e">E</button>
+              <button class="key-btn" data-key="r">R</button>
+              <button class="key-btn" data-key="t">T</button>
+              <button class="key-btn" data-key="y">Y</button>
+              <button class="key-btn" data-key="u">U</button>
+              <button class="key-btn" data-key="i">I</button>
+              <button class="key-btn" data-key="o">O</button>
+              <button class="key-btn" data-key="p">P</button>
+              <button class="key-btn small" data-key="[">[</button>
+              <button class="key-btn small" data-key="]">]</button>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="keyboard-row">
+              <button class="key-btn special-key caps-key" data-key="CAPS" id="capsBtn">Caps</button>
+              <button class="key-btn" data-key="a">A</button>
+              <button class="key-btn" data-key="s">S</button>
+              <button class="key-btn" data-key="d">D</button>
+              <button class="key-btn" data-key="f">F</button>
+              <button class="key-btn" data-key="g">G</button>
+              <button class="key-btn" data-key="h">H</button>
+              <button class="key-btn" data-key="j">J</button>
+              <button class="key-btn" data-key="k">K</button>
+              <button class="key-btn" data-key="l">L</button>
+              <button class="key-btn small" data-key=";">;</button>
+              <button class="key-btn special-key enter-key" data-key="ENTER">Enter</button>
+            </div>
+
+            <!-- Row 4 -->
+            <div class="keyboard-row">
+              <button class="key-btn special-key shift-key" data-key="SHIFT" id="shiftBtn">Shift</button>
+              <button class="key-btn" data-key="z">Z</button>
+              <button class="key-btn" data-key="x">X</button>
+              <button class="key-btn" data-key="c">C</button>
+              <button class="key-btn" data-key="v">V</button>
+              <button class="key-btn" data-key="b">B</button>
+              <button class="key-btn" data-key="n">N</button>
+              <button class="key-btn" data-key="m">M</button>
+              <button class="key-btn small" data-key=",">,</button>
+              <button class="key-btn small" data-key=".">.</button>
+              <button class="key-btn small" data-key="?">?</button>
+              <button class="key-btn special-key clear-key" data-key="CLEAR">Clr</button>
+            </div>
+
+            <!-- Row 5 -->
+            <div class="keyboard-row bottom-row">
+              <button class="key-btn special-key troll-scramble-btn" id="manualShuffleBtn">🔀 Scramble</button>
+              <button class="key-btn space-key" data-key=" ">SPACE</button>
+              <button class="key-btn special-key swap-mode-btn" id="quickToggleMode">⚡ Chaos</button>
+            </div>
+          </div>
+
+          <!-- CALCULATOR LAYOUT -->
+          <div class="keypad-layout" id="calculatorLayout">
+            <div class="calc-grid">
+              <button class="key-btn calc-op" data-key="CLEAR">AC</button>
+              <button class="key-btn calc-op" data-key="+/-">±</button>
+              <button class="key-btn calc-op" data-key="%">%</button>
+              <button class="key-btn calc-op math-op" data-key="/">÷</button>
+
+              <button class="key-btn" data-key="7">7</button>
+              <button class="key-btn" data-key="8">8</button>
+              <button class="key-btn" data-key="9">9</button>
+              <button class="key-btn calc-op math-op" data-key="*">&times;</button>
+
+              <button class="key-btn" data-key="4">4</button>
+              <button class="key-btn" data-key="5">5</button>
+              <button class="key-btn" data-key="6">6</button>
+              <button class="key-btn calc-op math-op" data-key="-">-</button>
+
+              <button class="key-btn" data-key="1">1</button>
+              <button class="key-btn" data-key="2">2</button>
+              <button class="key-btn" data-key="3">3</button>
+              <button class="key-btn calc-op math-op" data-key="+">+</button>
+
+              <button class="key-btn zero-key" data-key="0">0</button>
+              <button class="key-btn" data-key=".">.</button>
+              <button class="key-btn calc-op equal-key" data-key="=">=</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="physical-keyboard-hint">
+          <span>💡 Physical keyboard typing is supported! (It's infected too)</span>
+        </div>
+      </section>
+
+      <!-- Right Column: Troll Control Deck & Diagnostics -->
+      <aside class="control-panel">
+        <!-- Frustration Gauge -->
+        <div class="panel-card frustration-card">
+          <div class="card-title-row">
+            <h3>💢 FRUSTRATION METER</h3>
+            <span class="frustration-percent" id="frustrationPercent">0%</span>
+          </div>
+          <div class="meter-bar-track">
+            <div class="meter-bar-fill" id="meterFill" style="width: 0%;"></div>
+          </div>
+          <p class="meter-quote" id="meterQuote">"I have a good feeling about this key..."</p>
+          <div class="meter-stats">
+            <div class="stat-pill">
+              <span class="stat-num" id="statKeystrokes">0</span>
+              <span class="stat-name">Keystrokes</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="statWrongs">0</span>
+              <span class="stat-name">Trolled</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-num" id="statAccuracy">0%</span>
+              <span class="stat-name">Intent Kept</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Wrong Input Strategy Modes -->
+        <div class="panel-card modes-card">
+          <h3>🎭 MISCHIEF MODES</h3>
+          <p class="card-desc">Choose how the keypad will deceive you:</p>
+
+          <div class="radio-modes-list">
+            <label class="mode-option">
+              <input type="radio" name="mischiefMode" value="fatfinger" checked>
+              <div class="mode-info">
+                <div class="mode-name">
+                  <span>Fat Finger (Neighbor Keys)</span>
+                  <span class="tag">Popular</span>
+                </div>
+                <div class="mode-desc">Types an adjacent key instead of the one you pressed.</div>
+              </div>
+            </label>
+
+            <label class="mode-option">
+              <input type="radio" name="mischiefMode" value="opposite">
+              <div class="mode-info">
+                <div class="mode-name">
+                  <span>Opposite Day (Inversion)</span>
+                </div>
+                <div class="mode-desc">1 becomes 9, A becomes Z, Space becomes Delete.</div>
+              </div>
+            </label>
+
+            <label class="mode-option">
+              <input type="radio" name="mischiefMode" value="shuffler">
+              <div class="mode-info">
+                <div class="mode-name">
+                  <span>The ATM Shuffler</span>
+                  <span class="tag tag-chaos">Dynamic</span>
+                </div>
+                <div class="mode-desc">Physical key positions scramble after every click.</div>
+              </div>
+            </label>
+
+            <label class="mode-option">
+              <input type="radio" name="mischiefMode" value="slippery">
+              <div class="mode-info">
+                <div class="mode-name">
+                  <span>Slippery / Runaway Keys</span>
+                  <span class="tag tag-evil">Infuriating</span>
+                </div>
+                <div class="mode-desc">Buttons physically dodge your cursor when you try to click them.</div>
+              </div>
+            </label>
+
+            <label class="mode-option">
+              <input type="radio" name="mischiefMode" value="autocorrupt">
+              <div class="mode-info">
+                <div class="mode-name">
+                  <span>Evil Autocorrect</span>
+                </div>
+                <div class="mode-desc">"Corrects" your words into absurd things mid-sentence.</div>
+              </div>
+            </label>
+
+            <label class="mode-option">
+              <input type="radio" name="mischiefMode" value="mayhem">
+              <div class="mode-info">
+                <div class="mode-name">
+                  <span>Total Mayhem (All Combined)</span>
+                  <span class="tag tag-danger">Insanity</span>
+                </div>
+                <div class="mode-desc">Random glitches, upside-down typing, shakes, and chaos.</div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Chaos Modifiers & Toggles -->
+        <div class="panel-card modifiers-card">
+          <h3>⚙️ CHAOS MODIFIERS</h3>
+          <div class="modifier-toggles">
+            <label class="toggle-row">
+              <span>Backspace Trap (adds letters instead)</span>
+              <input type="checkbox" id="toggleBackspaceTrap" checked>
+              <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-row">
+              <span>Screen Glitch & Shake on Error</span>
+              <input type="checkbox" id="toggleScreenShake" checked>
+              <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-row">
+              <span>Key Label Obfuscation / Blinking</span>
+              <input type="checkbox" id="toggleGhostKeys">
+              <span class="toggle-switch"></span>
+            </label>
+
+            <label class="toggle-row cheat-toggle">
+              <span class="cheat-label">😇 Angel Mode (Actual Normal Typing)</span>
+              <input type="checkbox" id="toggleAngelMode">
+              <span class="toggle-switch"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- How To Beat It / Secrets -->
+        <div class="panel-card tips-card">
+          <h3>🕵️ HACKER'S HINT</h3>
+          <p id="hackerHint">
+            Can you type the secret PIN in challenge mode? Notice which buttons map to what, or enable <em>Angel Mode</em> if you surrender!
+          </p>
+          <button id="showCheatSheetBtn" class="hint-btn">Toggle Key Mapping Matrix</button>
+          <div class="cheat-matrix hidden" id="cheatMatrix">
+            <div class="matrix-title">Current Output Mapping:</div>
+            <div class="matrix-list" id="matrixList"></div>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Toast Notification Overlay -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Victory Modal (when challenge completed) -->
+    <div class="modal-overlay hidden" id="victoryModal">
+      <div class="modal-card">
+        <div class="modal-icon">🏆🎉</div>
+        <h2>IMPOSSIBLE VICTORY!</h2>
+        <p id="victoryMessage">You successfully bypassed the Wrong Input Keypad!</p>
+        <div class="victory-stats" id="victoryStats"></div>
+        <button id="modalCloseBtn" class="pill-btn primary">Claim Glory</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio synthesis engine (Web Audio API, no external dependencies) -->
+  <script src="audio.js"></script>
+  <!-- Main Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
+
